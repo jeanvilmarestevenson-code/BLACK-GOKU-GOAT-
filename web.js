@@ -150,7 +150,7 @@ sock.ev.on('messages.upsert', async({messages})=>{
       return
     }
   }
-  if(!canUse){ await sock.sendMessage(from,{text:"🖤 *Seul Black Goku peut utiliser ce pouvoir* 🖤"},{quoted:m}); return }
+  if(!canUse){ await sock.sendMessage(from,{text:"*Seul Black Goku peut utiliser ce pouvoir* "},{quoted:m}); return }
   if(!db.botOn&&!isOwner&&cmd!=="bot") return
   try{
   if(["black","menu","config","info","help"].includes(cmd)){ await sock.sendMessage(from,{text:getMenu()},{quoted:m}) }
@@ -179,7 +179,7 @@ sock.ev.on('messages.upsert', async({messages})=>{
   else if(cmd==="pt"){ if(q.includes("off")){ db.pt=db.pt.filter(x=>x!==from); saveDB(); await sock.sendMessage(from,{text:R.pt_off},{quoted:m}) } else { if(!db.pt.includes(from)){db.pt.push(from);saveDB()} await sock.sendMessage(from,{text:R.pt_on},{quoted:m}) } }
   else if(cmd==="vq"){
     const quoted=m.message.extendedTextMessage?.contextInfo?.quotedMessage
-    if(!quoted) return sock.sendMessage(from,{text:"🖤 *Réponds à une vue unique pour que je perce son voile.* 🖤"},{quoted:m})
+    if(!quoted) return sock.sendMessage(from,{text:"*Réponds à une vue unique pour que je perce son voile.* "},{quoted:m})
     const msg=quoted.viewOnceMessageV2?.message||quoted.viewOnceMessage?.message
     if(!msg) return sock.sendMessage(from,{text:"💀 *Ce voile est vide. Il n'y a rien à révéler.* 💀"},{quoted:m})
     const type=Object.keys(msg)[0]
@@ -197,7 +197,7 @@ sock.ev.on('messages.upsert', async({messages})=>{
     try{
       let url = Math.random()>0.5? 'https://api.waifu.pics/sfw/waifu' : 'https://api.waifu.pics/sfw/shinobu'
       let res=await axios.get(url)
-      await sock.sendMessage(from,{image:{url:res.data.url}, caption:"🌸 *Création de Black Goku* 🌸"},{quoted:m})
+      await sock.sendMessage(from,{image:{url:res.data.url}, caption:"*Création de Black Goku*"},{quoted:m})
     }catch{
       let res=await axios.get('https://api.waifu.pics/sfw/boy')
       await sock.sendMessage(from,{image:{url:res.data.url}, caption:"⚡ *Garçon créé par Black Goku* ⚡"},{quoted:m})
@@ -219,6 +219,6 @@ sock.ev.on('messages.upsert', async({messages})=>{
 }
 startBot()
 app.get('/', (req,res)=>{
-  res.send(`<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}.box{border:2px solid #a00;padding:20px;border-radius:15px;margin-top:30px}.code{font-size:35px;letter-spacing:4px;color:#ff0040;font-weight:bold}</style></head><body><h1>BLACK-GOKU H24 🖤</h1><div class="box"><p>${status}</p><h2>CODE 8 CHIFFRES:</h2><div class="code">${lastCode}</div><p>WhatsApp > Appareils liés > Lier avec numéro</p></div><pre style="text-align:left;margin-top:20px;border:1px solid #333;padding:10px;white-space:pre-wrap">${getMenu()}</pre></body></html>`)
+  res.send(`<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}.box{border:2px solid #a00;padding:20px;border-radius:15px;margin-top:30px}.code{font-size:35px;letter-spacing:4px;color:#ff0040;font-weight:bold}</style></head><body><h1>BLACK-GOKU H24 </h1><div class="box"><p>${status}</p><h2>CODE 8 CHIFFRES:</h2><div class="code">${lastCode}</div><p>WhatsApp > Appareils liés > Lier avec numéro</p></div><pre style="text-align:left;margin-top:20px;border:1px solid #333;padding:10px;white-space:pre-wrap">${getMenu()}</pre></body></html>`)
 })
 app.listen(PORT, ()=>console.log("WEB "+PORT))
