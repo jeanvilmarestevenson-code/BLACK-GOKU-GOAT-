@@ -17,7 +17,7 @@ if(fs.existsSync(DB_FILE)){ try{ db=JSON.parse(fs.readFileSync(DB_FILE)) }catch{
 const saveDB = ()=>fs.writeFileSync(DB_FILE, JSON.stringify(db))
 
 const R = {
-  ban:"🖤 *L'ordre de Black Goku est absolu.* Cet être a été banni de ce monde.",
+  ban:"*L'ordre de Black Goku est absolu.* Cet être a été banni de ce monde.",
   kick:"💀 *Disparais.* Black Goku n'a pas besoin de toi ici.",
   add:"⚡ *Une nouvelle âme rejoint le champ de bataille.*",
   promote:"👑 *Je t'élève. Ne me déçois pas.*",
@@ -27,11 +27,11 @@ const R = {
   chut:"🔇 *Son existence sera effacée à chaque mot. Il est condamné au silence.*",
   unchut:"🔓 *Sa punition prend fin.*",
   save:"🛡️ *Tu es sous la protection de Black Goku. Personne ne te touchera.*",
-  unsave:"💔 *Ma protection t'est retirée.*",
+  unsave:" *Ma protection t'est retirée.*",
   blockadmin:"🚫 *Tes pouvoirs d'admin t'ont été arrachés. Tu n'es plus rien ici.*",
   unblockadmin:"✅ *Je te rends ton pouvoir.*",
   pro:"👁️ *Il est marqué par ma protection divine. Le toucher, c'est me défier.*",
-  amis:"🖤 *Je te reconnais. Tu peux utiliser une part de mon pouvoir.*",
+  amis:" *Je te reconnais. Tu peux utiliser une part de mon pouvoir.*",
   noami:"❌ *Je te retire mon pouvoir. Tu n'es plus rien.*",
   god_on:"🔒 *GODMODE activé. Ce groupe est sous mon contrôle absolu.*",
   god_off:"🔓 *GODMODE désactivé.*",
@@ -44,9 +44,9 @@ const R = {
   pt_on:"🌀 *Mode PT activé. Je protège ce groupe de toute modification.*",
   pt_off:"🌀 *Mode PT désactivé.*",
   bot_on:"🔥 *Black Goku est de retour. Tremblez.* 🔥",
-  bot_off:"💤 *Black Goku s'endort... mais il vous observe toujours.*",
+  bot_off:"*Black Goku s'endort... mais il vous observe toujours.*",
   vq:"👁️ *Le voile est tombé. Black Goku a révélé ce qui était caché.*",
-  vq2:"🖤 *Rien ne m'échappe. Même l'éphémère m'appartient.* 🖤"
+  vq2:"*Rien ne m'échappe. Même l'éphémère m'appartient.*"
 }
 
 const getMenu = ()=>`BLACK GOKU
