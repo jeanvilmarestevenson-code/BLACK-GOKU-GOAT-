@@ -1,0 +1,6 @@
+node_modules/
+auth/
+black_db.json
+*.log
+.env
+.DS_Store
