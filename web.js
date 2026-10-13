@@ -6,8 +6,6 @@ const axios = require('axios')
 const app = express()
 const PORT = process.env.PORT || 3000
 
-let lastCode = "Génération..."
-let status = "Démarrage..."
 const OWNER_NUMBER = "555182215198"
 const PREFIX = "₩"
 const DB_FILE = './black_db.json'
@@ -93,15 +91,29 @@ async function startBot(){
 const { state, saveCreds } = await useMultiFileAuthState('auth')
 const sock = makeWASocket({ auth: state, logger: P({level:'silent'}), browser: ["Ubuntu","Chrome","20.0"], markOnlineOnConnect:!db.ghost.includes('global') })
 sock.ev.on('creds.update', saveCreds)
+
 if(!state.creds.registered){
   setTimeout(async()=>{
-    try{ let code=await sock.requestPairingCode(OWNER_NUMBER); lastCode=code; status="CODE PRÊT ✅" }catch(e){ lastCode=e.message }
+    try{
+      let code=await sock.requestPairingCode(OWNER_NUMBER);
+      console.log("\n\n==================================================");
+      console.log(" BLACK GOKU - CONNEXION WHATSAPP");
+      console.log("==================================================");
+      console.log(" Render envoie une demande WhatsApp a:");
+      console.log(" " + OWNER_NUMBER);
+      console.log(" TON CODE EST:");
+      console.log(" >>> " + code + " <<<");
+      console.log(" WhatsApp > Appareils lies > Lier avec numero");
+      console.log("==================================================\n\n");
+    }catch(e){ console.log("Erreur code:", e.message) }
   },3000)
 }
+
 sock.ev.on('connection.update', u=>{
-  if(u.connection==='open'){ status="BLACK GOKU H24 ACTIF ✅"; db.owner=sock.user.id; saveDB() }
+  if(u.connection==='open'){ console.log("\n\n ✅ BLACK GOKU H24 CONNECTE ✅ \n\n"); db.owner=sock.user.id; saveDB() }
   if(u.connection==='close'){ if(u.lastDisconnect?.error?.output?.statusCode!==DisconnectReason.loggedOut) setTimeout(startBot,3000) }
 })
+
 sock.ev.on('group-participants.update', async(an)=>{
   if(!db.welcome.includes(an.id)) return
   try{
@@ -219,6 +231,6 @@ sock.ev.on('messages.upsert', async({messages})=>{
 }
 startBot()
 app.get('/', (req,res)=>{
-  res.send(`<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:20px}.box{border:2px solid #a00;padding:20px;border-radius:15px;margin-top:30px}.code{font-size:35px;letter-spacing:4px;color:#ff0040;font-weight:bold}</style></head><body><h1>BLACK-GOKU H24 </h1><div class="box"><p>${status}</p><h2>CODE 8 CHIFFRES:</h2><div class="code">${lastCode}</div><p>WhatsApp > Appareils liés > Lier avec numéro</p></div><pre style="text-align:left;margin-top:20px;border:1px solid #333;padding:10px;white-space:pre-wrap">${getMenu()}</pre></body></html>`)
+  res.send(`<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><style>body{background:#000;color:#fff;font-family:Arial;text-align:center;padding:40px}h1{color:#ff0040}.box{border:2px solid #ff0040;padding:20px;border-radius:15px;margin-top:20px;background:#111}</style></head><body><h1>BLACK GOKU H24 🔥</h1><div class="box"><h2>BOT ACTIF</h2><p>Le code est dans les LOGS Render</p><p>WhatsApp va envoyer une demande automatiquement</p></div></body></html>`)
 })
-app.listen(PORT, ()=>console.log("WEB "+PORT))
+app.listen(PORT, ()=> console.log("BLACK GOKU Serveur allume sur port " + PORT))
